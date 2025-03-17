@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-})->middleware('auth');
+    return redirect()->route('login'); // Redirige al login
+});
 
 // Login
 Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -29,3 +29,6 @@ Route::post('/register', [AuthController::class, 'store'])->name('auth.store');
 
 // Logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+Route::get('/welcome', function () {
+    return view('welcome');
+})->name('welcome');

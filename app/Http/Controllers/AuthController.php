@@ -29,7 +29,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/');
+            return redirect()->intended('welcome');
         }
 
         return back()->withErrors([
@@ -49,6 +49,7 @@ class AuthController extends Controller
         $data['password'] = Hash::make($request->password);
         User::create($data);
         return redirect('/login');
+        auth()->login($user);
     }
 
     public function logout(Request $request)
